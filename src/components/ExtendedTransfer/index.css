@@ -1,0 +1,24 @@
+.transfer__layout {
+    display: flex;
+    flex-direction: row;
+}
+
+.transfer__layout__buttons {
+    display: flex;
+    flex-direction: row;
+    margin-left: 40px;
+    justify-content: space-evenly;
+    height: 40px;
+    margin-top: 10px;
+    align-items: start;
+}
+
+
+.rotateimg90 {
+    -webkit-transform:rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+    transform-origin: left top;
+  }

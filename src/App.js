@@ -1,24 +1,56 @@
 import logo from './logo.svg';
 import './App.css';
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+import ExtendedTransfer from './components/ExtendedTransfer';
+import { useState } from 'react';
+
+const mockData = [];
+for (let i = 0; i < 20; i++) {
+  mockData.push({
+    key: i.toString(),
+    title: `content ${i + 1}`,
+    description: `description of content${i}`,
+  });
+}
+
+
 
 function App() {
+  const [targetKeys, setTargetKeys] = useState([]);
+  const [selectedKeys, setSelectedKeys] = useState([]);
+  const onChange = (nextTargetKeys, direction, moveKeys) => {
+    console.log('targetKeys:', nextTargetKeys);
+    console.log('direction:', direction);
+    console.log('moveKeys:', moveKeys);
+    setTargetKeys(nextTargetKeys);
+  };
+
+  const onSelectChange = (sourceSelectedKeys, targetSelectedKeys) => {
+    console.log('sourceSelectedKeys:', sourceSelectedKeys);
+    console.log('targetSelectedKeys:', targetSelectedKeys);
+    setSelectedKeys([...sourceSelectedKeys, ...targetSelectedKeys]);
+  };
+
+  const onScroll = (direction, e) => {
+    console.log('direction:', direction);
+    console.log('target:', e.target);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: "30px" }}>
+      <ExtendedTransfer
+        dataSource={mockData}
+        titles={['Source', 'Target']}
+        targetKeys={targetKeys}
+        setTargetKeys={setTargetKeys}
+        setSelectedKeys={setSelectedKeys}
+        onChange={onChange}
+        onSelectChange={onSelectChange}
+        onScroll={onScroll}
+        render={item => item.title}
+      />
     </div>
+
   );
 }
 
